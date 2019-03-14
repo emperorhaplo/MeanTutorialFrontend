@@ -19,4 +19,21 @@ export class PersonService {
             return res["names"].docs as [Person];
         }))
     }
+
+    createPerson(person: Person): Observable<any> {
+        return this.http.post(this.personUrl, person);
+    }
+
+    updatePerson(person: Person): Observable<any> {
+        return this.http.put(this.personUrl, person);
+    }
+
+    deletePerson(id: string): Observable<any> {
+        return this.http.delete(this.personUrl + '/?id=' + id)
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred: ' +  error);
+        return Promise.reject(error.message);
+    }
 }

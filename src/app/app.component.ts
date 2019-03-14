@@ -23,4 +23,12 @@ export class AppComponent {
       console.log(people)
     })
   }
+
+  onDelete(person: Person) {
+    console.log("deleting: " + person._id);
+    this.personService.deletePerson(person._id)
+    .subscribe(result => {
+      console.log(result)
+    });
+  }
 }

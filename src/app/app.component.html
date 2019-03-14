@@ -1,13 +1,26 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
-      Column 1
-    </div>
-    <div class="col-md-8">
-      Column 2
-    </div>
-    <div class="col-md-2">
-      Column 3
+    <div class="people" *ngIf="personArray">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of personArray">
+            <td>{{person.name}}</td>
+            <td>{{person.age}}</td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="onDelete(person)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
