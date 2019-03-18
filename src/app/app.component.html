@@ -4,9 +4,9 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Options</th>
+            <th class="col-md-5">Name</th>
+            <th class="col-md-5">Age</th>
+            <th class="col-md-2">Options</th>
           </tr>
         </thead>
         <tbody>
@@ -14,9 +14,10 @@
             <td>{{person.name}}</td>
             <td>{{person.age}}</td>
             <td>
-              <button type="button" class="btn btn-danger" (click)="onDelete(person)">
+              <button type="button" class="btn btn-danger" (click)="onDelete(person)">Delete
                 <i class="fas fa-trash-alt"></i>
               </button>
+              <button type="button" class="btn btn-primary">Update</button>
             </td>
           </tr>
         </tbody>
