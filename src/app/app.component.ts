@@ -16,7 +16,7 @@ export class AppComponent {
   public person: Person = new Person();
   personArray: Person[];
 
-  ngOnInit(): void {
+  updatePeople(): void {
     this.personService.getPeople()
     .subscribe(people => {
       this.personArray = people;
@@ -24,11 +24,15 @@ export class AppComponent {
     })
   }
 
+  ngOnInit(): void {
+    this.updatePeople()
+  }
+
   onDelete(person: Person) {
     console.log("deleting: " + person._id);
     this.personService.deletePerson(person._id)
     .subscribe(result => {
-      console.log(result)
+      this.updatePeople()
     });
   }
 }
