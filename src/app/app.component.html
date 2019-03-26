@@ -1,4 +1,11 @@
 <div class="container-fluid">
+  <div class="row" *ngIf="errorMessage">
+    <div class="col-12">
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+    </div>
+  </div>
   <div class="row">
     <table class="table" *ngIf="personArray">
       <thead>
@@ -10,13 +17,35 @@
       </thead>
       <tbody>
         <tr class="d-flex" *ngFor="let person of personArray">
-          <td class="col-5">{{person.name}}</td>
-          <td class="col-5">{{person.age}}</td>
+          <td class="col-5">
+            <div *ngIf="!editMode">{{person.name}}</div>
+            <input (input)="person.name = $event.target.value" type="text" class="form-control" id="personName"
+              placeholder="{{person.name}}" *ngIf="editMode">
+          </td>
+          <td class="col-5">
+            <div *ngIf="!editMode">{{person.age}}</div>
+            <input (input)="person.age = $event.target.value" type="number" class="form-control" id="personAge"
+              placeholder="{{person.age}}" *ngIf="editMode">
+          </td>
           <td class="col-2">
-            <button type="button" class="btn btn-danger" (click)="onDelete(person)">
+            <button type="button" class="btn first-button"
+              [ngClass]="{'btn-primary': !editMode, 'btn-danger': editMode}" (click)="onEdit()">
+              <fa-icon icon="pen" *ngIf="!editMode"></fa-icon>
+              <fa-icon icon="times" *ngIf="editMode"></fa-icon>
+            </button>
+            <button type="button" class="btn btn-danger" (click)="onDelete(person)" *ngIf="!editMode">
               <fa-icon icon="trash-alt"></fa-icon>
             </button>
-            <button type="button" class="btn btn-primary"></button>
+            <button type="button" class="btn btn-success" (click)="onSave(person)" *ngIf="editMode">
+              <fa-icon icon="save"></fa-icon>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td class="col12">
+            <button type="button" class="brn btn-success" (click)="onAdd()">
+              <fa-icon icon="plus"></fa-icon>
+            </button>
           </td>
         </tr>
       </tbody>
