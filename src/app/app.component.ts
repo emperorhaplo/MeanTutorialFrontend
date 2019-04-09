@@ -15,6 +15,8 @@ export class AppComponent {
 
   public person: Person = new Person();
   personArray: Person[];
+  editMode: Boolean;
+  errorMessage: String
 
   updatePeople(): void {
     this.personService.getPeople()
@@ -25,7 +27,8 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.updatePeople()
+    this.updatePeople();
+    this.editMode = false;
   }
 
   onDelete(person: Person) {
@@ -34,5 +37,34 @@ export class AppComponent {
     .subscribe(result => {
       this.updatePeople()
     });
+  }
+
+  onEdit() {
+    this.editMode = !this.editMode
+  }
+
+  onAdd() {
+    this.editMode = true
+    this.personArray.push(new Person())
+  }
+
+  onSave(person: Person) {
+    if(person._id) {
+      console.log("saving: " + person._id)
+      this.personService.updatePerson(person)
+      .subscribe(result => {
+        this.editMode = !this.editMode;
+      })
+    } else {
+      this.personService.createPerson(person)
+      .subscribe(result => {
+        this.updatePeople()
+        this.errorMessage = null
+        this.editMode = false
+      }, error => {
+        console.log(error)
+        this.errorMessage = error.error.message
+      })
+    }
   }
 }

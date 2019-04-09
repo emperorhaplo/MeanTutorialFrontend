@@ -21,11 +21,11 @@ export class PersonService {
     }
 
     createPerson(person: Person): Observable<any> {
-        return this.http.post(this.personUrl, person);
+        return this.http.post(this.personUrl, {name: person.name, age: person.age});
     }
 
     updatePerson(person: Person): Observable<any> {
-        return this.http.put(this.personUrl, person);
+        return this.http.put(this.personUrl, {id: person._id, name: person.name, age: person.age});
     }
 
     deletePerson(id: string): Observable<any> {
