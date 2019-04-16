@@ -28,22 +28,23 @@
               placeholder="{{person.age}}" *ngIf="editMode">
           </td>
           <td class="col-2">
-            <button type="button" class="btn first-button"
-              [ngClass]="{'btn-primary': !editMode, 'btn-danger': editMode}" (click)="onEdit()">
-              <fa-icon icon="pen" *ngIf="!editMode"></fa-icon>
-              <fa-icon icon="times" *ngIf="editMode"></fa-icon>
-            </button>
-            <button type="button" class="btn btn-danger" (click)="onDelete(person)" *ngIf="!editMode">
-              <fa-icon icon="trash-alt"></fa-icon>
+            <button type="button" class="btn btn-success" (click)="onEdit()" *ngIf="!editMode">
+              <fa-icon icon="pen"></fa-icon>
             </button>
             <button type="button" class="btn btn-success" (click)="onSave(person)" *ngIf="editMode">
               <fa-icon icon="save"></fa-icon>
             </button>
+            <button type="button" class="btn btn-danger" (click)="onDelete(person)" *ngIf="!editMode">
+              <fa-icon icon="trash-alt"></fa-icon>
+            </button>
+            <button type="button" class="btn btn-danger" (click)="onEdit()" *ngIf="editMode">
+              <fa-icon icon="times"></fa-icon>
+            </button>
           </td>
         </tr>
         <tr>
-          <td class="col12">
-            <button type="button" class="brn btn-success" (click)="onAdd()">
+          <td style="text-align: center">
+            <button type="button" class="btn btn-success" (click)="onAdd()">
               <fa-icon icon="plus"></fa-icon>
             </button>
           </td>
